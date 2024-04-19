@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package nodev;
+
+import "google/protobuf/timestamp.proto";
+
+service Chat {
+  rpc History(HistoryRequest) returns (HistoryResponse);
+  rpc Send(SendRequest) returns (SendResponse);
+  rpc Messages(MessageRequest) returns (stream MessageResponse);
+}
+
+message Message {
+    string id = 1;
+    string body = 2;
+    google.protobuf.Timestamp recieved = 3;
+}
+
+message HistoryRequest {
+    string room = 1;
+}
+
+message HistoryResponse {
+    repeated Message messages = 1;
+}
+
+message SendRequest {
+    string room = 1;
+    string body = 2;
+}
+
+message SendResponse {
+    Message message = 1;
+}
+
+message MessageRequest {
+    string room = 1;
+}
+
+message MessageResponse {
+    Message message = 1;
+}
