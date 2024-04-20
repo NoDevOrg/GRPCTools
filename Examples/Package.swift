@@ -31,9 +31,26 @@ package.targets = [
             .plugin(name: "SwiftProtobufPlugin", package: "swift-protobuf"),
             .plugin(name: "GRPCSwiftPlugin", package: "grpc-swift"),
         ]
+    ),
+    .executableTarget(
+        name: "DashboardAndChatService",
+        dependencies: [
+            .product(name: "GRPCServer", package: "GRPCTools"),
+            .product(name: "Pioneer", package: "pioneer"),
+        ],
+        resources: [
+            .copy("Proto"),
+            .copy("swift-protobuf-config.json"),
+            .copy("grpc-swift-config.json")
+        ],
+        plugins: [
+            .plugin(name: "SwiftProtobufPlugin", package: "swift-protobuf"),
+            .plugin(name: "GRPCSwiftPlugin", package: "grpc-swift"),
+        ]
     )
 ]
 
 package.products = [
     .executable(name: "ChatService", targets: ["ChatService"]),
+    .executable(name: "DashboardAndChatService", targets: ["DashboardAndChatService"]),
 ]
