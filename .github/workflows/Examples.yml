@@ -1,0 +1,26 @@
+name: GRPCTools Examples Workflow
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install protoc
+        uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Restore Cache
+        uses: actions/cache@v3
+        with:
+          path: ./build
+          key: grpctools-examples-spm-${{ hashFiles('Examples/Package.resolved') }}
+          restore-keys: |
+            grpctools-examples-spm-
+      - name: Build
+        run: PROTOC_PATH=$(which protoc) swift build --package-path=./Examples
