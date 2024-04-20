@@ -25,7 +25,7 @@ package.targets = [
         resources: [
             .copy("Proto"),
             .copy("swift-protobuf-config.json"),
-            .copy("grpc-swift-config.json")
+            .copy("grpc-swift-config.json"),
         ],
         plugins: [
             .plugin(name: "SwiftProtobufPlugin", package: "swift-protobuf"),
@@ -41,13 +41,13 @@ package.targets = [
         resources: [
             .copy("Proto"),
             .copy("swift-protobuf-config.json"),
-            .copy("grpc-swift-config.json")
+            .copy("grpc-swift-config.json"),
         ],
         plugins: [
             .plugin(name: "SwiftProtobufPlugin", package: "swift-protobuf"),
             .plugin(name: "GRPCSwiftPlugin", package: "grpc-swift"),
         ]
-    )
+    ),
 ]
 
 package.products = [

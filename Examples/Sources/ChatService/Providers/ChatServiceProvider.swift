@@ -1,6 +1,6 @@
 import GRPC
-import Vapor
 import Pioneer
+import Vapor
 
 final class ChatServiceProvider {
     let application: Application
@@ -33,15 +33,17 @@ extension ChatServiceProvider: Nodev_ChatAsyncProvider {
 
     func messages(request: Nodev_MessageRequest, responseStream: GRPCAsyncResponseStreamWriter<Nodev_MessageResponse>, context: GRPCAsyncServerCallContext) async throws {
         for message in Database.messages(room: request.room).prefix(5) {
-            try await responseStream.send(Nodev_MessageResponse.with {
-                $0.message = message.grpc
-            })
+            try await responseStream.send(
+                Nodev_MessageResponse.with {
+                    $0.message = message.grpc
+                })
         }
 
         for try await message in pubsub.asyncStream(Database.Message.self, for: request.room) {
-            try await responseStream.send(Nodev_MessageResponse.with {
-                $0.message = message.grpc
-            })
+            try await responseStream.send(
+                Nodev_MessageResponse.with {
+                    $0.message = message.grpc
+                })
         }
     }
 }

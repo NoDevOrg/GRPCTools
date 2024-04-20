@@ -9,7 +9,7 @@ struct Database {
     }
 
     static var roomToMessages = [String: [Message]]()
-    
+
     static func messages(room: String) -> [Message] {
         roomToMessages[room] ?? []
     }

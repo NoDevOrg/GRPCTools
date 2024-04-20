@@ -23,7 +23,7 @@ extension DualServer: Vapor.Server {
     public var onShutdown: EventLoopFuture<Void> {
         let servers: [Vapor.Server] = [
             application.grpc.server.shared,
-            application.http.server.shared
+            application.http.server.shared,
         ]
 
         return servers.sequencedFlatMapEach(on: application.eventLoopGroup.next()) { server in

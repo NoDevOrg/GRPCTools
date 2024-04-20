@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(name: "GRPCTools")
 
 package.platforms = [
-    .macOS(.v13),
+    .macOS(.v13)
 ]
 
 package.dependencies = [
@@ -23,5 +23,5 @@ package.targets = [
 ]
 
 package.products = [
-    .library(name: "GRPCServer", targets: ["GRPCServer"]),
+    .library(name: "GRPCServer", targets: ["GRPCServer"])
 ]
