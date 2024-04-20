@@ -22,6 +22,8 @@ let package = Package(
 
 In order to combine gRPC and Vapor, you'll need to create a class that implements the `*Provider` protocol. To learn more about creating a gRPC provider and code generation you can go [here](./Docs/CodeGen.md). Now that you have a provider(s) - you need to start a Vapor Application and configure it. A minimal `main.swift` will look like this:
 
+`main.swift`
+
 ```swift
 import GRPCServer
 import Vapor
@@ -41,6 +43,8 @@ try application.run()
 `application.grpc.server.configuration` exposes all configuration options from the `grpc-swift` package so everything that library can do you can configure here.
 
 When creating your provider, it can be useful to pass a reference to the Vapor Application so you can access all the Vapor features.
+
+`ChatProvider.swift`
 
 ```
 final class ChatServiceProvider {

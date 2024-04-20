@@ -22,7 +22,7 @@ If you want to generate both Protobuf and GRPC code, you'll need to add `swift-p
 
 `swift-protobuf-config.json`
 
-```json
+```json filename="swift-protobuf-config.json"
 {
   "invocations": [
     {
@@ -47,6 +47,8 @@ If you want to generate both Protobuf and GRPC code, you'll need to add `swift-p
 }
 ```
 
+`Package.swift`
+
 ```swift
 let package = Package(
     dependencies = [
@@ -68,7 +70,9 @@ let package = Package(
 )
 ```
 
-For a server the tooling will generate a protocol that you must implement on a class. Given a proto file like `Chat.proto` below the tooling will generate `Nodev_ChatProvider` and `Nodev_ChatAsyncProvider`. The first uses [SwiftNIO]'s Future types while the second uses the newer async/await syntax. To implement a provider you will write a class that implements the provider protocol.
+For a server, the tooling will generate a protocol that you must implement on a class. Given a proto file like `Chat.proto` below the tooling will generate `Nodev_ChatProvider` and `Nodev_ChatAsyncProvider`. The first uses [SwiftNIO](https://github.com/apple/swift-nio)'s EventLoop types while the second uses the newer async/await syntax. To implement a provider you will write a class that implements the provider protocol.
+
+`Chat.proto`
 
 ```
 syntax = "proto3";
@@ -114,6 +118,8 @@ message MessageResponse {
     Message message = 1;
 }
 ```
+
+`ChatProvider.swift`
 
 ```swift
 import GRPC
