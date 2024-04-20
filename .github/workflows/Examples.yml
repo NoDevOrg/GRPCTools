@@ -6,9 +6,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  unit-tests:
+  build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install protoc
+        uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          echo "/opt/hostedtoolcache/protoc/" >> $GITHUB_PATH
       - name: Checkout
         uses: actions/checkout@v3
       - name: Restore Cache
